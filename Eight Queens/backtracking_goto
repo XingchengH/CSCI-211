@@ -47,3 +47,8 @@ void hw6(){
 //fout.close();
 return;
 }
+
+int main() {
+hw6();
+return 0;
+}

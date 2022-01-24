@@ -1,0 +1,64 @@
+//Xingcheng Huang, CSCI 211, Lab 6-7
+// Eight Queens Problem
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+void hw7(){
+    int q[8], c = 0, count = 0;
+    q[0] = 0;
+
+  while ( true ) // nc c != -1
+  {
+        c++;
+  if ( c == 8 ){
+  count++;
+    cout << "Solution: " << count << endl;
+    int b[8][8] = {0};
+    for ( int i = 0; i < c; i++ ){
+        for ( int j = 0; j < c; j++ ){
+          if ( q[i] == j ) cout << "1" << "\t";
+          else cout << "0" << "\t";
+       }
+      cout << endl;
+    }
+}
+
+  q[c] = -1;
+
+  while (1) // nr
+    {
+      q[c]++;
+
+      if (q[c] == 8) 
+      {
+           c--;
+          if ( c == -1 ) return;
+            continue;
+       }
+
+       bool checked = true;
+
+      for (int i = 0; i < c; i++) {
+          if (q[i] == q[c] || c - i == abs(q[c] - q[i])) {
+               checked = false;
+               break;
+              //goto nr;  // break for, and continue inner while
+          } 
+       }
+
+       if ( checked ) break;
+       else           continue;
+
+      // break inner while    //goto nc;
+    }
+          
+  }
+            
+}
+
+int main() {
+hw7();
+return 0;
+}

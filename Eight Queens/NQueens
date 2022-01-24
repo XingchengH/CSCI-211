@@ -1,0 +1,58 @@
+//nqueens problem
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+
+bool ok( int q[], int c ){
+   // Reuse the ok function from your 1D 8 queens program.
+   for(int i=0;i<c;i++){
+     if((q[i] == q[c]) || (abs(q[c] - q[i]) == (c - i)))  return false;
+   }
+   return true;
+}
+
+// This function should return the number of solutions for the given board size
+// (you don't need to print the solutions).
+
+int nqueens(int n) {
+   // Dynamically declare an array of size n and initialize the first element to 0.
+   int *q = new int [n];
+   //int q[n];
+   int c = 0, count = 0;
+   q[0] = 0;
+   int border = n - 1;
+
+   // Reuse the code from your 1D 8 queens program to find the solutions (may need updates).
+  while ( c > -1 ){
+    if ( c > border ){
+      count++;
+      c--;
+      q[c]++; // move queen to the next row
+    }
+    else if ( q[c] > border ){
+      c--;
+      if ( c > -1 ) q[c]++;
+    }
+    else {
+      if ( ok( q, c ) ){
+        c++;
+        if ( c < n ) q[c] = 0;
+      }
+      else q[c]++; // next row for place the queen
+    }
+  }
+
+   // Delete the array.
+  delete []q;//delete memories
+
+   // Return the number of solutions.
+  return count;
+}
+
+int main() {
+   int n = 8; //I think there have more quick program which can immediatly print out the #solutions when there is a large number of queens. Such when n = 20;
+   for (int i = 1; i <= n; ++i)
+      cout << "There are " << nqueens(i) << " solutions to the " << i << " queens problem.\n";
+   return 0;
+}
